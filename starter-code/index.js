@@ -10,6 +10,7 @@ class SortedList {
   add(item) {
     this.items.push(item); // added new item to existing empty array - this.items
     this.items.sort(function(a, b) {
+      //this.items.sort((a,b) =>)
       // sorted an array this.items in ascending order
       return a - b;
     });
@@ -29,6 +30,10 @@ class SortedList {
       return this.items[pos];
     }
   }
+  get(pos) {
+    if (pos >= this.items.length) throw new Error("OutOfBounds");
+    else return this.items[pos];
+  }
 
   max() {
     if (this.items.length == 0) {
@@ -46,9 +51,24 @@ class SortedList {
     }
   }
 
-  sum() {}
+  // Bonus iterations
 
-  avg() {}
+  sum() {
+    if (this.items.length === 0) return 0;
+    else
+      return this.items.reduce((accu, curr) => {
+        return accu + curr;
+      }, 0);
+  }
+
+  avg() {
+    if (this.items.length === 0) throw new Error("OutOfBounds");
+    else
+      var sum = this.items.reduce((accu, curr) => {
+        return accu + curr;
+      }, 0);
+    return sum / this.items.length;
+  }
 }
 
 module.exports = SortedList;
